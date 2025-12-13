@@ -25,8 +25,10 @@ highp float random(highp float p){
 		p = p/3.0+ViewPositionAndTime.w;
 		return mix(hash11(floor(p)),hash11(ceil(p)),smoothstep(0.0,1.0,fract(p)))*2.0;
 }
-#define a_texcoord1 vec2(fract(a_texcoord1.x*15.9375),floor(a_texcoord1.x*15.9375)*0.0625)
 void main() {
+uvec2 _6d79f = uvec2(round(a_texcoord1 * 65535.0));
+    uvec2 _5e4ed = _6d79f;
+   vec2 uv1 = vec2(uvec2(_5e4ed.y >> 4u, _5e4ed.y) & uvec2(15u,15u)) * vec2_splat(0.066666670143604278564453125);
     v_sky = vec4_splat(0.);
     mat4 model;
 #ifdef INSTANCING__ON
