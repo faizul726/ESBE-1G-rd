@@ -26,9 +26,7 @@ highp float random(highp float p){
 		return mix(hash11(floor(p)),hash11(ceil(p)),smoothstep(0.0,1.0,fract(p)))*2.0;
 }
 void main() {
-uvec2 _6d79f = uvec2(round(a_texcoord1 * 65535.0));
-    uvec2 _5e4ed = _6d79f;
-   vec2 uv1 = vec2(uvec2(_5e4ed.y >> 4u, _5e4ed.y) & uvec2(15u,15u)) * vec2_splat(0.066666670143604278564453125);
+    vec2 uv1 = fract(a_texcoord1.y*vec2(256.0, 4096.0));
     v_sky = vec4_splat(0.);
     mat4 model;
 #ifdef INSTANCING__ON
@@ -65,7 +63,7 @@ uvec2 _6d79f = uvec2(round(a_texcoord1 * 65535.0));
     }
 #endif
     v_texcoord0 = a_texcoord0;
-    v_lightmapUV = a_texcoord1;
+    v_lightmapUV = uv1;
     v_color0 = color;
     gl_Position = mul(u_viewProj, vec4(worldPos, 1.0));
 v_fog = fogColor;

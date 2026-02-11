@@ -73,12 +73,14 @@ float ss = smoothstep(0.0,0.5,FogColor.r - FogColor.g);
 _color = mix(mix(_color,FogColor,.33)+vec4(0.0,0.05,0.1,0.0),FogColor*1.1,smoothstep(.1,.4,v_color0.r));
 vec3 __color = _color.rgb;
 
+	// Aurora code
 	float night = smoothstep(0.4,0.2,SkyColor.b);
 	if(night*weather>0.0){
 		vec4 aur = vec4(smoothstep(0.0,1.5,aurora(normalize(vec3(v_prevWorldPos.x*4.0,1.0,v_prevWorldPos.z*4.0)))));
 		_color.rgb += aur.rgb*night*weather;
 	}
 
+	// Cloud code
 	float day = smoothstep(0.15,0.25,FogColor.g);
 	vec3 cc = mix(vec3(0.2,0.21,0.25),vec3(1.3,1.3,1.1),day);
 	vec3 cc2 = mix(vec3(0.2,0.21,0.25)*1.1,__color*vec3(1.,.9,.8),day);
