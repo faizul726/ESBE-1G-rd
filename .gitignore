@@ -1,0 +1,6 @@
+src-materials
+shaderc.exe
+shaderc
+build
+build/*
+*.material.bin
